@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">News</a></li>
+        <li><a href="">Contact</a></li>
+        <li><a href="">About</a></li>
+    </ul>
+
+    <div id="form">
+        <form action="/create-user" method="POST">
+            <fieldset>
+                <legend>Create New User</legend>
+                <div class="input-group">
+                    <label>Email: </label>
+                    <input type="text" name="email">
+                </div>
+
+                <div class="input-group">
+                    <label>Name: </label>
+                    <input type="text" name="name" id="name">
+                </div>
+
+                <div class="input-group">
+                    <label>City: </label>
+                    <input type="text" name="city">
+                </div>
+
+                <button type="submit" onclick="return check()">Save</button>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+        function check() {
+            var name = document.getElementById("name").value;
+            if (name === "" || !name) {
+                alert("Nhập tên");
+                document.getElementById("name").focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>
