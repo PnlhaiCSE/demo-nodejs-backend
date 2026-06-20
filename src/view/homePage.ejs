@@ -48,8 +48,13 @@
                                 <%= user.city %>
                             </td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-secondary">Delete</button>
+                                <form action="/update-user/<%= user.id %>" method="GET" class="d-inline-block border-0">
+                                    <button class="btn btn-primary">Edit</button>
+                                </form>
+
+                                <form action="" method="post" class="d-inline-block border-0">
+                                    <button class="btn btn-secondary">Delete</button>
+                                </form>
                             </td>
                         </tr>
 

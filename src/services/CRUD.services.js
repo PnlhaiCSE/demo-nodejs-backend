@@ -19,6 +19,19 @@ const postCreateUser = async (email, name, city) => {
     }
 }
 
+const getUserById = async (id) => {
+    let [results, fields] = await connection.query(
+        `SELECT * FROM Users u WHERE id = ?`, [id]
+    );
+    return results.length > 0 ? results : {};
+}
+
+const updateUserById = async (id, email, name, city) => {
+    await connection.query(`UPDATE Users 
+        SET email = ?, city = ?, name = ?
+        WHERE id = ?`, [email, city, name, id]);
+}
+
 module.exports = {
-    getAllUsers, postCreateUser
+    getAllUsers, postCreateUser, getUserById, updateUserById
 }
