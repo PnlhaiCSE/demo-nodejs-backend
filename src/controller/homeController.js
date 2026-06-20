@@ -1,37 +1,34 @@
 const connection = require('../config/database');
+const { getAllUsers, postCreateUser } = require('../services/CRUD.services');
 
-const getHomePage = (req, res) => {
-    return res.render('test');
+const getHomePage = async (req, res) => {
+    let results = await getAllUsers();
+    // console.log(results);
+
+    res.render('homePage.ejs', { users: results });
 }
 
-const getLongHai = (req, res) => {
-    return res.send('PnlhaiCSE | IUH');
-}
+// test route
+// const getLongHai = (req, res) => {
+//     res.send('PnlhaiCSE | IUH');
+// }
+// const getABC = (req, res) => {
+//     res.send('ABC ABC ABC');
+// }
+// aaaaaaaaaaaaaaaaaaaaaaa
 
-const getABC = (req, res) => {
-    return res.send('ABC ABC ABC');
-}
 
 const getForm = (req, res) => {
-    return res.render('form');
+    res.render('form.ejs');
 }
 
-const postNewUser = (req, res) => {
-    console.log(">>>check: ", req.body);
+const postNewUser = async (req, res) => {
+    // console.log(">>>check: ", req.body);
     let { email, name, city } = req.body;
+    await postCreateUser(email, name, city);
 
-    try {
-        connection.query(
-            `INSERT INTO Users (email, name, city)
-            VALUES(?, ?, ?)`,
-            [email, name, city]
-        );
-
-    } catch (err) {
-        console.log(err);
-    }
-    return res.send("Create success");
+    res.redirect('/');
 }
 
 
-module.exports = { getHomePage, getLongHai, getABC, getForm, postNewUser }
+module.exports = { getHomePage, getForm, postNewUser }

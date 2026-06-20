@@ -9,11 +9,6 @@ img {
     margin: 50px;
 }
 
-button {
-    margin: 20px;
-    cursor: pointer;
-}
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -44,6 +39,31 @@ ul li a:hover {
     width: 500px;
 }
 
-.input-group {
-    margin: 10px;
+.active {
+    background-color: green;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: coral;
+}
+
+.action {
+    display: inline;
+}
+
+form {
+    border: 1px solid;
+    border-radius: 5px;
 }
