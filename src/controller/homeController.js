@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 const {
-    getAllUsers, postCreateUser, getUserById, updateUserById
+    getAllUsers, postCreateUser, getUserById, updateUserById, deleteUser
 } = require('../services/CRUD.services');
 
 const getHomePage = async (req, res) => {
@@ -65,7 +65,7 @@ const handleDel = async (req, res) => {
     // console.log(req.body);
     let id = req.body.id;
     try {
-        await connection.query(`DELETE FROM Users  WHERE id = ?`, [id]);
+        await deleteUser(id);
         res.send('delete ok');
     } catch (err) {
         console.log(err);
