@@ -54,4 +54,26 @@ const updateUser = async (req, res) => {
     res.redirect('/');
 }
 
-module.exports = { getHomePage, getForm, postNewUser, getEditForm, updateUser }
+const getDelForm = async (req, res) => {
+    let id = req.params.id;
+    let [user] = await getUserById(id);
+
+    res.render('delete.ejs', { user: user });
+}
+
+const handleDel = async (req, res) => {
+    // console.log(req.body);
+    let id = req.body.id;
+    try {
+        await connection.query(`DELETE FROM Users  WHERE id = ?`, [id]);
+        res.send('delete ok');
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err.message);
+    }
+
+}
+
+module.exports = {
+    getHomePage, getForm, postNewUser, getEditForm, updateUser, getDelForm, handleDel
+}
