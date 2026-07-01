@@ -1,0 +1,9 @@
+main {
+    border-radius: 10px;
+    border: 2px solid;
+}
+
+.active {
+    background-color: rgb(101, 101, 242);
+    border-radius: 5px;
+}

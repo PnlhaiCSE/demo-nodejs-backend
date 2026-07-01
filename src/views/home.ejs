@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-info">
+        <div class="container">
+            <span class="navbar-brand">PnlhaiCSE</span>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/file">File</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="ms-3 mt-2 btn btn-success btn-md" data-bs-toggle="modal" data-bs-target="#modalCreate">
+        Create User
+    </button>
+
+    <!-- modal create -->
+    <!-- Modal -->
+    <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modalTitleId-create"
+        aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/create-user" method="POST">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="modalTitleId-create">
+                            Create User
+                        </h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div>
+                                <label for="email-user">Email:</label>
+                                <input class="form-control" type="text" id="email-user" name="email" required>
+                            </div>
+
+                            <div class="mt-1 mb-1">
+                                <label for="name-user">Name:</label>
+                                <input class="form-control" type="text" id="name-user" name="name" required>
+                            </div>
+
+                            <div>
+                                <label for="city-user">City: </label>
+                                <input class="form-control" type="text" id="city-user" name="city" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <h1 class="ps-5 mt-3">Danh sách users</h1>
+    <main class="mt-1 m-4">
+        <div class="table-responsive mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((user)=> {%>
+                        <tr>
+                            <td>
+                                <%= user.id %>
+                            </td>
+                            <td>
+                                <%= user.email %>
+                            </td>
+                            <td>
+                                <%= user.name %>
+                            </td>
+                            <td>
+                                <%= user.city %>
+                            </td>
+                            <td>
+                                <div class="d-inline-block">
+                                    <!-- Modal trigger button -->
+                                    <button class="btn btn-primary edit" data-bs-toggle="modal"
+                                        data-bs-target="#modalId" data-id="<%= user.id %>">Edit</button>
+
+                                    <button class="btn btn-danger delete" data-id="<%= user.id %>">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <% });%>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+
+    <!-- modal update -->
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+        aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Update User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-none">
+                        <label>Id:
+                            <input class="form-control" type="text" id="id">
+                        </label>
+                    </div>
+                    <div>
+                        <label>Email:
+                            <input class="form-control" type="text" id="email">
+                        </label>
+                    </div>
+                    <div>
+                        <label>Name:
+                            <input class="form-control" type="text" id="name">
+                        </label>
+                    </div>
+                    <div>
+                        <label>City:
+                            <input class="form-control" type="text" id="city">
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="luu-update">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/handle.CRUD.js"></script>
+</body>
+
+</html>
